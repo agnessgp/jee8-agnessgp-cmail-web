@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.annotation.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
@@ -30,6 +31,7 @@ import com.agnessgp.mail.service.ServiceException;
 import com.agnessgp.mail.util.UtilBean;
 
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Descripción de la Clase
@@ -39,7 +41,7 @@ import lombok.Getter;
  */
 @Named("contacto")
 @SessionScoped
-public class ContactoControlador extends UtilBean implements Serializable{
+public class ContactoControlador extends UtilBean implements Serializable {
 
 	/**
 	 * 
@@ -57,6 +59,11 @@ public class ContactoControlador extends UtilBean implements Serializable{
 	@EJB
 	@Getter
 	ComponenteService componenteService;
+	
+	@Getter
+	@Setter
+	@ManagedProperty(value = "#{subMenuPaginaControlador}")
+	private SubMenuPaginaControlador subMenuPagina;
 
 	@PostConstruct
 	public void init() {
@@ -65,7 +72,8 @@ public class ContactoControlador extends UtilBean implements Serializable{
 		contactoBean.initListaContactos();
 		contactoBean.initListaComponentes();
 		contactoBean.setListaComponentes(componenteService.crear(contactoBean.getListaComponentes(),
-		new Componente("frgCrearNuevo", "ui:fragment", Boolean.FALSE)));
+				new Componente("frgCrearNuevo", "ui:fragment", Boolean.FALSE)));
+		PrimeFaces.current().ajax().update("frmCrearNuevo");
 	}
 
 	public boolean obtenerEstadoComponente(String id) {
@@ -82,6 +90,7 @@ public class ContactoControlador extends UtilBean implements Serializable{
 			limpiarContacto();
 			buscarContactosTodos();
 			mostrarMensajeInfoPanel("Aviso", "El contacto fué creado exitosamente.");
+			componenteService.inactivarPorId(contactoBean.getListaComponentes(), "frgCrearNuevo");
 			PrimeFaces.current().ajax().update("frmCrearNuevo");
 		} catch (ServiceException e) {
 			mostrarMensajeErrorPanel("Error", e.getMessage());
@@ -102,9 +111,11 @@ public class ContactoControlador extends UtilBean implements Serializable{
 	}
 
 	public void nuevoAction() {
-		Logger.getAnonymousLogger().info("clicNuevo....");
+		limpiarContacto();
 		componenteService.activarPorId(contactoBean.getListaComponentes(), "frgCrearNuevo");
+		
 	}
+
 	public String informacionAction() {
 		Logger.getAnonymousLogger().info("clicInformacion....");
 		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("informacionVisible", true);
@@ -112,14 +123,15 @@ public class ContactoControlador extends UtilBean implements Serializable{
 	}
 
 	public void cancelarBtnContacto() {
-		contactoBean.setListaComponentes(componenteService.crear(contactoBean.getListaComponentes(),new Componente("frgCrearNuevo", "ui:fragment", Boolean.FALSE)));
+		componenteService.inactivarPorId(contactoBean.getListaComponentes(), "frgCrearNuevo");
+		PrimeFaces.current().ajax().update("frmCrearNuevo");
 	}
-	
+
 	public void buscarAction(ActionEvent event) {
 		MenuItem menuItem = ((MenuActionEvent) event).getMenuItem();
-	    String icono = new String(menuItem.getIcon()); // This can throw NumberFormatException
-	    Logger.getAnonymousLogger().info("icono...."+icono);
-	    // Do something with the seqNumber  
-    }
-	
+		//subMenuPagina
+		//String icono = new String(menuItem.getIcon()); 
+		//Logger.getAnonymousLogger().info("icono...." + icono);
+	}
+
 }

@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.persistence.criteria.Predicate;
 
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
-import org.primefaces.model.menu.MenuElement;
 import org.primefaces.model.menu.MenuModel;
 
 import com.agnessgp.mail.dto.Accion;
@@ -27,14 +25,15 @@ public class SubMenuService {
 		return listaAcciones;
 	}
 
-	public MenuModel cargarModelAccionesBasico(String controlador,List<Accion> listaAcciones) {
+	public MenuModel cargarModelAccionesBasico(String controlador, List<Accion> listaAcciones) {
 		MenuModel model = new DefaultMenuModel();
 		for (Accion accion : listaAcciones) {
 			DefaultMenuItem item = new DefaultMenuItem(accion.getNombre());
 			item.setUpdate(accion.getUpdate());
 			item.setIcon(accion.getIcono());
 			item.setDisabled(accion.getDeshabilitado());
-			String command = "#{".concat(controlador).concat(".").concat(accion.getNombre().toLowerCase()).concat("Action}");
+			String command = "#{".concat(controlador).concat(".").concat(accion.getNombre().toLowerCase())
+					.concat("Action}");
 			item.setCommand(command);
 			item.setAjax(accion.getAjax());
 			item.setStyle("font-size:10px;");
@@ -42,9 +41,23 @@ public class SubMenuService {
 		}
 		return model;
 	}
-	
-	public void activarAccion(MenuModel model, DefaultMenuItem defaultMenuItem) {
-		
-		
+
+	public List<Accion> activarAccion(List<Accion> listaAcciones, Accion accion) {
+
+		for (Accion accionItem : listaAcciones) {
+			if (accionItem.getId() == accion.getId()) {
+				accionItem.setDeshabilitado(Boolean.FALSE);
+			}
+		}
+		return listaAcciones;
+	}
+
+	public List<Accion> inactivarAccion(List<Accion> listaAcciones, Accion accion) {
+		for (Accion accionItem : listaAcciones) {
+			if (accionItem.getId() == accion.getId()) {
+				accionItem.setDeshabilitado(Boolean.TRUE);
+			}
+		}
+		return listaAcciones;
 	}
 }
