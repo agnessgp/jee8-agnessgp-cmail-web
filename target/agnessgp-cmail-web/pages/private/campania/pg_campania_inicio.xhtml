@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+                
+    <ui:define name="title">Contactos</ui:define>
+    <ui:define name="breadcrumb">
+        <li><p:link outcome="/pages/private/contactos/pg_contactos_inicio">Contactos</p:link></li>
+    </ui:define>
+                
+    <ui:define name="content">
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-12 ui-lg-6">
+                <!-- Left Side -->
+                <div class="card card-w-title">
+                    <h1>Nuevo Contacto</h1>
+                    <p:panelGrid columns="3" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                        <h:panelGroup styleClass="md-inputfield">
+                            <p:inputText value="#{contacto.contactoBean.contacto.nombres}"/>
+                            <label>Nombre</label>
+                        </h:panelGroup>
+                        <h:panelGroup styleClass="md-inputfield">
+                            <p:inputText />
+                            <label>Apellido</label>
+                        </h:panelGroup>
+                        <h:panelGroup styleClass="md-inputfield">
+                            <p:inputText />
+                            <label>Email</label>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                     <div class="ui-g">
+                            <div style="text-align:center">                                
+                                <p:commandButton type="button" value="Primary Button" style="margin-bottom:10px;"/>
+                            </div>
+                     </div>           
+                </div>
+                
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

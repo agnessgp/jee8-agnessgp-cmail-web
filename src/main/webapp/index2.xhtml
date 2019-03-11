@@ -1,0 +1,99 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+                
+    <ui:define name="title">Forms</ui:define>
+    
+    <ui:define name="breadcrumb">
+        <li>Contactos</li>
+        <li>/</li>
+        <li><p:link outcome="/index">Nuevo</p:link></li>
+    </ui:define>
+                
+    <ui:define name="content">
+    
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-12 ui-lg-6">
+                <!-- Left Side -->
+                <div class="card card-w-title">
+                    <h1>Nuevo Contacto</h1>
+                    <p:panelGrid columns="3" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                        <h:panelGroup styleClass="md-inputfield">
+                            <p:inputText value="#{contacto.contactoBean.contacto.nombres}"/>
+                            <label>Nombre</label>
+                        </h:panelGroup>
+                        <h:panelGroup styleClass="md-inputfield">
+                            <p:inputText />
+                            <label>Apellido</label>
+                        </h:panelGroup>
+                        <h:panelGroup styleClass="md-inputfield">
+                            <p:inputText />
+                            <label>Email</label>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                     <div class="ui-g">
+                            <div style="text-align:center">                                
+                                <p:commandButton type="button" value="Primary Button" style="margin-bottom:10px;"/>
+                            </div>
+                     </div>           
+                </div>
+                
+            </div>
+        </div>
+        <div class="ui-g dashboard">
+		        <div class="ui-g-12 ui-lg126 messages">
+		                <p:panel header="Lista Contactos">
+		                    <ul>
+		                        <li>
+		                            <a href="#">
+		                                <p:graphicImage name="images/avatar1.png" library="serenity-layout" width="45"/>
+		                                <div>
+		                                    <span class="name">Joshua Williams</span>
+		                                    <span class="message">Sales reports attached.</span>
+		                                </div>
+		                                <p:commandButton type="button" icon="ui-icon-close" title="Reply" styleClass="remove-btn" />
+		                                <p:commandButton type="button" icon="ui-icon-message" title="Reply" styleClass="message-btn secondary-btn"/>
+		                            </a>
+		                        </li>
+		                        <li>
+		                            <a href="#">
+		                                <p:graphicImage name="images/avatar2.png" library="serenity-layout" width="45"/>
+		                                <div>
+		                                    <span class="name">Emily Watson</span>
+		                                    <span class="message">Meeting at 2pm tomorrow.</span>
+		                                </div>
+		                                <p:commandButton type="button" icon="ui-icon-close" title="Reply" styleClass="remove-btn" />
+		                                <p:commandButton type="button" icon="ui-icon-message" title="Reply" styleClass="message-btn secondary-btn"/>
+		                            </a>
+		                        </li>
+		                        <li>
+		                            <a href="#">
+		                                <p:graphicImage name="images/avatar3.png" library="serenity-layout" width="45"/>
+		                                <div>
+		                                    <span class="name">James White</span>
+		                                    <span class="message">Status update required.</span>
+		                                </div>
+		                                <p:commandButton type="button" icon="ui-icon-close" title="Reply" styleClass="remove-btn" />
+		                                <p:commandButton type="button" icon="ui-icon-message" title="Reply" styleClass="message-btn secondary-btn"/>
+		                            </a>
+		                        </li>
+		                        <li>
+		                            <a href="#">
+		                                <p:graphicImage name="images/avatar4.png" library="serenity-layout" width="45"/>
+		                                <div>
+		                                    <span class="name">David Hughes</span>
+		                                    <span class="message">Exchange rates estimates.</span>
+		                                </div>
+		                                <p:commandButton type="button" icon="ui-icon-close" title="Reply" styleClass="remove-btn" />
+		                                <p:commandButton type="button" icon="ui-icon-message" title="Reply" styleClass="message-btn secondary-btn"/>
+		                            </a>
+		                        </li>
+		                    </ul>
+		                </p:panel>
+		            </div>
+		       </div>     
+    </ui:define>
+</ui:composition>
