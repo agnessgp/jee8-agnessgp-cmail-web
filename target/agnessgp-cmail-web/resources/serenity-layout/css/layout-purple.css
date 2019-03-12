@@ -1420,7 +1420,7 @@ body {
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
   .layout-wrapper .layout-main .layout-topbar {
-    height: 64px;
+    height: 45px;
     background-color: #8E24AA;
     padding: 16px 42px 16px 24px;
     position: fixed;
@@ -1638,8 +1638,8 @@ body {
     -webkit-box-shadow: inset 0 -2px 4px 0 rgba(0, 0, 0, 0.14);
     -moz-box-shadow: inset 0 -2px 4px 0 rgba(0, 0, 0, 0.14);
     box-shadow: inset 0 -2px 4px 0 rgba(0, 0, 0, 0.14);
-    min-height: 42px;
-    padding-top: 64px; }
+    min-height: 30px;
+    padding-top: 44px; }
     .layout-wrapper .layout-main .layout-breadcrumb:before, .layout-wrapper .layout-main .layout-breadcrumb:after {
       content: "";
       display: table; }
@@ -1668,8 +1668,8 @@ body {
       .layout-wrapper .layout-main .layout-breadcrumb .layout-breadcrumb-options a {
         color: #757575;
         display: inline-block;
-        width: 42px;
-        height: 42px;
+        width: 32px;
+        height: 32px;
         line-height: 42px;
         text-align: center;
         -moz-transition: background-color 0.3s;

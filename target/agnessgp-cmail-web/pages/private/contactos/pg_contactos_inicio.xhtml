@@ -11,7 +11,7 @@
 	</ui:define>
 	<ui:define name="content">
 	<h:form id="frmCrearNuevo">
-		<p:menubar model="#{subMenuPaginaControlador.model}"></p:menubar>
+		<p:menubar id="mebSubMenu" model="#{subMenuPaginaControlador.model}"></p:menubar>
 
 		<ui:fragment rendered="#{contacto.obtenerEstadoComponente('frgCrearNuevo')}">
 			<div class="ui-g ui-fluid">

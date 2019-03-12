@@ -18,22 +18,7 @@
         <h:outputScript name="js/layout.js" library="serenity-layout" />
         <h:outputScript name="js/ripple.js" library="serenity-layout" />
         <ui:insert name="head"/>
-        
-        <style>
-        div.cargando {
-			width: 100%;height: 100%;
-			overflow: hidden; 
-			top: 0px;
-			left: 0px;
-			z-index: 10000;
-			text-align: center;
-			position:absolute; 
-			background-color: #4c71ad;
-			opacity:0.6;
-			filter:alpha(opacity=40);
-			}
-        </style>
-        
+
     </h:head>
 
     <h:body>
@@ -72,15 +57,10 @@
                 <div class="layout-main-mask"></div>
             </div>
         </div>
-               <p:ajaxStatus style="width:32px;height:32px;position:fixed;right:7px;bottom:7px"> 
-
+        <p:ajaxStatus style="width:32px;height:32px;position:fixed;right:7px;bottom:7px"> 
            <f:facet name="start">
-           		
-<i class="fa fa-circle-o-notch fa-spin ajax-loader" aria-hidden="true"></i>
-				
-               
+           		<i class="fa fa-circle-o-notch fa-spin ajax-loader" aria-hidden="true"></i>
            </f:facet>
-
            <f:facet name="complete">
                <h:outputText value="" />
            </f:facet>
