@@ -24,6 +24,17 @@ public class SubMenuService {
 		listaAcciones.add(new Accion(AccionesEnum.INFORMACION.getId(), AccionesEnum.INFORMACION.getDescripcion(), Boolean.FALSE,Boolean.TRUE, "/pg_contactos_inicio", AccionesEnum.INFORMACION.getIcono(),"",Boolean.FALSE));
 		return listaAcciones;
 	}
+	
+	
+	public List<Accion> cargarAccionesCampania() {
+		List<Accion> listaAcciones = new ArrayList<>();
+		listaAcciones.add(new Accion(AccionesEnum.ATRAS.getId(), AccionesEnum.ATRAS.getDescripcion(), Boolean.TRUE,	Boolean.TRUE, "/pg_campania_inicio",  AccionesEnum.ATRAS.getIcono(),"",Boolean.TRUE));
+		listaAcciones.add(new Accion(AccionesEnum.REFRESCAR.getId(), AccionesEnum.REFRESCAR.getDescripcion(),	Boolean.FALSE, Boolean.TRUE, "/pg_campania_inicio", AccionesEnum.REFRESCAR.getIcono(),"",Boolean.TRUE));
+		listaAcciones.add(new Accion(AccionesEnum.NUEVO.getId(), AccionesEnum.NUEVO.getDescripcion(), Boolean.FALSE,	Boolean.TRUE, "/pg_campania_inicio", AccionesEnum.NUEVO.getIcono(),"frmCrearNuevo",Boolean.TRUE));
+		listaAcciones.add(new Accion(AccionesEnum.BUSCAR.getId(), AccionesEnum.BUSCAR.getDescripcion(), Boolean.FALSE,Boolean.TRUE, "/pg_campania_inicio", AccionesEnum.BUSCAR.getIcono(),"",Boolean.TRUE));
+		listaAcciones.add(new Accion(AccionesEnum.INFORMACION.getId(), AccionesEnum.INFORMACION.getDescripcion(), Boolean.FALSE,Boolean.TRUE, "/pg_campania_inicio", AccionesEnum.INFORMACION.getIcono(),"",Boolean.FALSE));
+		return listaAcciones;
+	}
 
 	public MenuModel cargarModelAccionesBasico(String controlador, List<Accion> listaAcciones) {
 		MenuModel model = new DefaultMenuModel();

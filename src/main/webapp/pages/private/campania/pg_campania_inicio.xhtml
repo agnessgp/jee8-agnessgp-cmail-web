@@ -1,43 +1,83 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui"
-                template="/WEB-INF/template.xhtml">
-                
-    <ui:define name="title">Contactos</ui:define>
-    <ui:define name="breadcrumb">
-        <li><p:link outcome="/pages/private/contactos/pg_contactos_inicio">Contactos</p:link></li>
-    </ui:define>
-                
-    <ui:define name="content">
-        <div class="ui-g ui-fluid">
-            <div class="ui-g-12 ui-lg-6">
-                <!-- Left Side -->
-                <div class="card card-w-title">
-                    <h1>Nuevo Contacto</h1>
-                    <p:panelGrid columns="3" layout="grid" styleClass="ui-panelgrid-blank form-group">
-                        <h:panelGroup styleClass="md-inputfield">
-                            <p:inputText value="#{contacto.contactoBean.contacto.nombres}"/>
-                            <label>Nombre</label>
-                        </h:panelGroup>
-                        <h:panelGroup styleClass="md-inputfield">
-                            <p:inputText />
-                            <label>Apellido</label>
-                        </h:panelGroup>
-                        <h:panelGroup styleClass="md-inputfield">
-                            <p:inputText />
-                            <label>Email</label>
-                        </h:panelGroup>
-                    </p:panelGrid>
-                     <div class="ui-g">
-                            <div style="text-align:center">                                
-                                <p:commandButton type="button" value="Primary Button" style="margin-bottom:10px;"/>
-                            </div>
-                     </div>           
-                </div>
-                
-            </div>
-        </div>
-    </ui:define>
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="title">Campaña</ui:define>
+	<ui:define name="breadcrumb">
+		<li><p:link
+				outcome="/pages/private/contactos/pg_campania_inicio">Campaña</p:link></li>
+	</ui:define>
+	<ui:define name="content">
+	<h:form id="frmCrearNuevaCampania">
+		<p:menubar id="mebSubMenu" model="#{subMenuPaginaControlador.model}"></p:menubar>
+
+		<ui:fragment rendered="#{campaña.obtenerEstadoComponente('frgCrearNuevaCampania')}">
+			<div class="ui-g ui-fluid">
+				<div class="ui-g-12 ui-lg-6">
+					<!-- Left Side -->
+					<div class="card card-w-title">
+						<h1>Nueva Campaña</h1>
+						<p:panelGrid columns="1" layout="grid"
+							styleClass="ui-panelgrid-blank form-group">
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText value="#{contacto.contactoBean.contacto.nombres}" />
+								<label>Nombre</label>
+							</h:panelGroup>
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText value="#{contacto.contactoBean.contacto.apellidos}" />
+								<label>Apellido</label>
+							</h:panelGroup>
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText value="#{contacto.contactoBean.contacto.correoElectronico}" />
+								<label>Email</label>
+							</h:panelGroup>
+						</p:panelGrid>
+						
+						<div align="right">
+								<p:commandButton id="btnLimpiar" type="reset" action="#{contacto.limpiarContacto()}" value="Limpiar" style="width:auto;margin-bottom:10px;"/>
+								<p:commandButton id="btnCancelar" type="button" value="Cancelar"  onclick="PF('dlgCancelar').show()" style="width:auto;margin-bottom:10px;"/>
+								<p:commandButton id="btnAceptar" value="Aceptar" action="#{contacto.crearContacto()}" oncomplete="" style="width:auto;margin-bottom:10px;"/>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			
+				<p:confirmDialog message="Esta seguro que desea cancelar.?"
+					header="Initiating destroy process" severity="alert" widgetVar="dlgCancelar">
+					<p:commandButton value="Aceptar"
+						actionListener="#{contacto.cancelarBtnContacto()}" update="frmCrearNuevo"
+						oncomplete="PF('dlgCancelar').hide()" />
+					<p:commandButton value="Cancelar" onclick="PF('dlgCancelar').hide();"
+						type="button" />
+				</p:confirmDialog>
+				
+				
+
+			</ui:fragment>
+		<ui:fragment >
+			<div style="margin-top: 10px;"></div>
+			<p:dataTable id="tblContactosTodos" var="contac"
+				value="#{contacto.contactoBean.listaContactosTodos}">
+				<p:column headerText="Nombres" sortBy="#{contac.nombres}">
+					<h:outputText value="#{contac.nombres}" />
+				</p:column>
+
+				<p:column headerText="Apellidos" sortBy="#{contac.apellidos}">
+					<h:outputText value="#{contac.apellidos}" />
+				</p:column>
+
+				<p:column headerText="Correo" sortBy="#{contac.correoElectronico}">
+					<h:outputText value="#{contac.correoElectronico}" />
+				</p:column>
+			</p:dataTable>
+		</ui:fragment>
+		<p:dialog visible="#{flash.informacionVisible}" header="Información">
+  					PrimeFaces Menubar brings desktop menubar to JSF applications.<br/>
+  					Combine submenus and menu items to execute ajax, non-ajax and navigations.
+		</p:dialog>
+		</h:form>
+	</ui:define>
 </ui:composition>

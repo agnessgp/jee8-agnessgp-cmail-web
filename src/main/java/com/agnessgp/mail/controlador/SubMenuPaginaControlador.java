@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 import org.primefaces.model.menu.MenuModel;
@@ -17,7 +17,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Named
-@SessionScoped
+@RequestScoped
 public class SubMenuPaginaControlador implements Serializable {
 
 	/**
@@ -36,6 +36,10 @@ public class SubMenuPaginaControlador implements Serializable {
 	@Getter
 	@Setter
 	private MenuModel model;
+	
+	@Getter
+	@Setter
+	private String nombreControlador;
 
 	@Getter
 	@Setter
@@ -43,18 +47,27 @@ public class SubMenuPaginaControlador implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		listaAcciones = getSubMenuService().cargarAccionesBasico();
-		model = getSubMenuService().cargarModelAccionesBasico("contacto", listaAcciones);
+		initListaAcciones();
 	}
-
+	
+	public void initListaAcciones() {
+		listaAcciones = getSubMenuService().cargarAccionesBasico();
+	}
+	
+	public void initControlador(String nombreControlador) {
+		setNombreControlador(nombreControlador); 
+		model = getSubMenuService().cargarModelAccionesBasico(nombreControlador, listaAcciones);
+	}
+	
+	/*Métodos Comunes*/
 	public void activarAccionSeleccion() {
 		listaAcciones = getSubMenuService().activarAccion(getListaAcciones(), getAccionSeleccion());
-		model = getSubMenuService().cargarModelAccionesBasico("contacto", listaAcciones);
+		model = getSubMenuService().cargarModelAccionesBasico(getNombreControlador(), listaAcciones);
 	}
 
 	public void inactivarAccionSeleccion() {
 		listaAcciones = getSubMenuService().inactivarAccion(getListaAcciones(), getAccionSeleccion());
-		model = getSubMenuService().cargarModelAccionesBasico("contacto", listaAcciones);
+		model = getSubMenuService().cargarModelAccionesBasico(getNombreControlador(), listaAcciones);
 	}
 
 }

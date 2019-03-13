@@ -74,6 +74,9 @@ public class ContactoControlador extends UtilBean implements Serializable {
 		contactoBean.setListaComponentes(componenteService.crear(contactoBean.getListaComponentes(),
 				new Componente("frgCrearNuevo", "ui:fragment", Boolean.FALSE)));
 		PrimeFaces.current().ajax().update("frmCrearNuevo");
+		
+		subMenuPagina.initListaAcciones();
+		subMenuPagina.initControlador("contacto");
 	}
 
 	public boolean obtenerEstadoComponente(String id) {

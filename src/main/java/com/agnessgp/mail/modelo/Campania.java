@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,12 +25,19 @@ import lombok.Setter;
  * @Fecha: 24/02/2019
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = Campania.BUSCAR_TODOS, query = "SELECT c FROM Campania c")
+})
 public class Campania implements Serializable {
 
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = -1437559718440229531L;
+	// ======================================
+    // =             Constantes              =
+    // ======================================
+    public static final String BUSCAR_TODOS = "Campania.encontrarTodos";
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
