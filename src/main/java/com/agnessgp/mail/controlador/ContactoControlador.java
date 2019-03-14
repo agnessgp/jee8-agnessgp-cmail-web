@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.annotation.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
@@ -60,11 +59,9 @@ public class ContactoControlador extends UtilBean implements Serializable {
 	@Getter
 	ComponenteService componenteService;
 	
-	@Getter
-	@Setter
-	@ManagedProperty(value = "#{subMenuPaginaControlador}")
+	@Inject
 	private SubMenuPaginaControlador subMenuPagina;
-
+	
 	@PostConstruct
 	public void init() {
 		Logger.getAnonymousLogger().info("Cargando Contacto Controlador....");
