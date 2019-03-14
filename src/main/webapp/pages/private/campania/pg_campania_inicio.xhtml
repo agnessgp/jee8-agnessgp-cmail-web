@@ -9,55 +9,53 @@
 		<li><p:link outcome="/pages/private/campania/pg_campania_inicio">Campaña</p:link></li>
 	</ui:define>
 	<ui:define name="content">
-		<h:form id="frmCrearNuevaCampania">
-			<p:menubar id="mebSubMenu" model="#{campania.menuBean.model}"></p:menubar>
-
-			<ui:fragment
-				rendered="#{campania.obtenerEstadoComponente('frgCrearNuevaCampania')}">
-				<div class="ui-g ui-fluid">
-					<div class="ui-g-12 ui-lg-6">
-						<!-- Left Side -->
-						<div class="card card-w-title">
-							<h1>Nueva Campaña</h1>
-							<p:panelGrid columns="1" layout="grid"
-								styleClass="ui-panelgrid-blank form-group">
-								<h:panelGroup styleClass="md-inputfield">
-									<p:inputText
-										value="#{campania.campaniaBean.campania.fechaCreacion}" />
-									<label>Fecha</label>
-								</h:panelGroup>
-								<h:panelGroup styleClass="md-inputfield">
-									<p:inputText
-										value="#{campania.campaniaBean.campania.descripcion}" />
-									<label>Descripcion</label>
-								</h:panelGroup>
-							</p:panelGrid>
-							<div align="right">
-								<p:commandButton id="btnAceptar" value="Aceptar" action="#{campania.crearCampania()}" oncomplete="" style="width:auto;margin-bottom:10px;"/>
-							</div>
-						</div>
-					</div>
-				</div>
-			</ui:fragment>
-			
-			<ui:fragment >
-			<div style="margin-top: 10px;"></div>
-			<p:dataTable id="tblCampaniaTodos" var="campan"
-				value="#{campania.campaniaBean.listaCampaniasTodos}">
-				<p:column headerText="Identificador" sortBy="#{campan.id}">
-					<h:outputText value="#{campan.id}" />
-				</p:column>
-
-				<p:column headerText="Fecha" sortBy="#{campan.fechaCreacion}">
-					<h:outputText value="#{campan.fechaCreacion}" />
-				</p:column>
-
-				<p:column headerText="Descripción" sortBy="#{campan.descripcion}">
-					<h:outputText value="#{campan.descripcion}" />
-				</p:column>
-			</p:dataTable>
-		</ui:fragment>
-			
-		</h:form>
+	<h:body styleClass="landing-body">
+        <div class="landing-wrapper">
+            <div id="introduction">
+                <div>
+                    <h1>Bienvenidos, Correo Marketing</h1>
+                    <p>Presentamos la herramienta para optimizar su flujo de trabajo de correo electrónico de marketing.</p>
+                    <p:button outcome="/pages/private/campania/pg_campania_inicio" value="INICIAR AHORA"  styleClass="pink-btn"/>
+                </div>
+            </div>
+            <div id="features">
+                <div>
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-md-6 feature-box">
+                            <p:graphicImage name="images/landing/icon-responsive.svg" library="serenity-layout" />
+                            <div>
+                                <h3>(Paso 1)IDENTIDAD DE ENVIO</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="ui-g-12 ui-md-6 feature-box">
+                            <p:graphicImage name="images/landing/icon-moderndesign.svg" library="serenity-layout" />
+                            <div>
+                                <h3>(Paso 2)CONTACTOS DE ENVIO</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="ui-g-12 ui-md-6 feature-box">
+                            <p:graphicImage name="images/landing/icon-welldocumented.svg" library="serenity-layout" />
+                            <div>
+                                <h3>(Paso 3)BAJA DE SUSCRIPCION</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="ui-g-12 ui-md-6 feature-box">
+                            <p:graphicImage name="images/landing/icon-cleancode.svg" library="serenity-layout" />
+                            <div>
+                                <h3>(Paso 4)CAMPAÑA MARKETING</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>   
+		</h:body>
 	</ui:define>
 </ui:composition>
