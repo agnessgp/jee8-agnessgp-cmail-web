@@ -1,11 +1,13 @@
 package com.agnessgp.mail.controlador;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import org.primefaces.model.menu.MenuModel;
@@ -17,7 +19,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Named
-@RequestScoped
+@SessionScoped
 public class SubMenuPaginaControlador implements Serializable {
 
 	/**
@@ -47,7 +49,7 @@ public class SubMenuPaginaControlador implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		initListaAcciones();
+		setListaAcciones(new ArrayList<>());
 	}
 	
 	public void initListaAcciones() {
@@ -56,7 +58,7 @@ public class SubMenuPaginaControlador implements Serializable {
 	
 	public void initControlador(String nombreControlador) {
 		setNombreControlador(nombreControlador); 
-		model = getSubMenuService().cargarModelAccionesBasico(nombreControlador, listaAcciones);
+		setModel(getSubMenuService().cargarModelAccionesBasico(getNombreControlador(), listaAcciones));
 	}
 	
 	/*Métodos Comunes*/

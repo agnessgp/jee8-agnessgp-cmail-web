@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.annotation.ManagedProperty;
 import javax.faces.context.FacesContext;
@@ -40,7 +41,7 @@ import lombok.Setter;
  * @Fecha: 25/02/2019
  */
 @Named("contacto")
-@SessionScoped
+@RequestScoped
 public class ContactoControlador extends UtilBean implements Serializable {
 
 	/**
@@ -62,8 +63,8 @@ public class ContactoControlador extends UtilBean implements Serializable {
 	
 	@Getter
 	@Setter
-	@ManagedProperty(value = "#{subMenuPaginaControlador}")
-	private SubMenuPaginaControlador subMenuPagina;
+	@Inject	
+	private SubMenuPaginaControlador subMenuPaginaControlador;
 
 	@PostConstruct
 	public void init() {
@@ -73,10 +74,12 @@ public class ContactoControlador extends UtilBean implements Serializable {
 		contactoBean.initListaComponentes();
 		contactoBean.setListaComponentes(componenteService.crear(contactoBean.getListaComponentes(),
 				new Componente("frgCrearNuevo", "ui:fragment", Boolean.FALSE)));
-		PrimeFaces.current().ajax().update("frmCrearNuevo");
 		
-		subMenuPagina.initListaAcciones();
-		subMenuPagina.initControlador("contacto");
+		
+		subMenuPaginaControlador.initListaAcciones();
+		subMenuPaginaControlador.initControlador("contacto");
+		
+		PrimeFaces.current().ajax().update("frmCrearNuevo");
 	}
 
 	public boolean obtenerEstadoComponente(String id) {
