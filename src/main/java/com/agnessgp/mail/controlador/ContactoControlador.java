@@ -22,6 +22,7 @@ import org.primefaces.event.MenuActionEvent;
 import org.primefaces.model.menu.MenuItem;
 
 import com.agnessgp.mail.bean.ContactoBean;
+import com.agnessgp.mail.bean.MenuBean;
 import com.agnessgp.mail.dto.Componente;
 import com.agnessgp.mail.modelo.Contacto;
 import com.agnessgp.mail.service.ComponenteService;
@@ -30,7 +31,6 @@ import com.agnessgp.mail.service.ServiceException;
 import com.agnessgp.mail.util.UtilBean;
 
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Descripción de la Clase
@@ -40,7 +40,7 @@ import lombok.Setter;
  */
 @Named("contacto")
 @SessionScoped
-public class ContactoControlador extends UtilBean implements Serializable {
+public class ContactoControlador implements Serializable {
 
 	/**
 	 * 
@@ -57,10 +57,15 @@ public class ContactoControlador extends UtilBean implements Serializable {
 
 	@EJB
 	@Getter
-	ComponenteService componenteService;
+	ComponenteService componenteService;	
 	
 	@Inject
-	private SubMenuPaginaControlador subMenuPagina;
+	@Getter
+	private MenuBean menuBean;
+	
+	@Inject
+	@Getter
+	UtilBean utilBean;
 	
 	@PostConstruct
 	public void init() {
@@ -70,10 +75,8 @@ public class ContactoControlador extends UtilBean implements Serializable {
 		contactoBean.initListaComponentes();
 		contactoBean.setListaComponentes(componenteService.crear(contactoBean.getListaComponentes(),
 				new Componente("frgCrearNuevo", "ui:fragment", Boolean.FALSE)));
+		menuBean.initControlador("contacto");
 		PrimeFaces.current().ajax().update("frmCrearNuevo");
-		
-		subMenuPagina.initListaAcciones();
-		subMenuPagina.initControlador("contacto");
 	}
 
 	public boolean obtenerEstadoComponente(String id) {
@@ -86,34 +89,33 @@ public class ContactoControlador extends UtilBean implements Serializable {
 
 	public void crearContacto() {
 		try {
-			contactoService.crearNuevoContacto(getContactoBean().getContacto());
+			contactoService.crearNuevoContacto(contactoBean.getContacto());
 			limpiarContacto();
 			buscarContactosTodos();
-			mostrarMensajeInfoPanel("Aviso", "El contacto fué creado exitosamente.");
+			utilBean.mostrarMensajeInfoPanel("Aviso", "El contacto fué creado exitosamente.");
 			componenteService.inactivarPorId(contactoBean.getListaComponentes(), "frgCrearNuevo");
 			PrimeFaces.current().ajax().update("frmCrearNuevo");
 		} catch (ServiceException e) {
-			mostrarMensajeErrorPanel("Error", e.getMessage());
+			utilBean.mostrarMensajeErrorPanel("Error", e.getMessage());
 		}
 	}
 
 	public void limpiarContacto() {
-		getContactoBean().setContacto(new Contacto());
+		contactoBean.setContacto(new Contacto());
 	}
 
 	public void buscarContactosTodos() {
 		try {
-			getContactoBean().setListaContactosTodos(contactoService.listarContactos());
+			contactoBean.setListaContactosTodos(contactoService.listarContactos());
 		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
-			Logger.getAnonymousLogger().info(getContactoBean().getContacto().getCorreoElectronico());
+			Logger.getAnonymousLogger().info(contactoBean.getContacto().getCorreoElectronico());
 		}
 	}
 
 	public void nuevoAction() {
 		limpiarContacto();
 		componenteService.activarPorId(contactoBean.getListaComponentes(), "frgCrearNuevo");
-		
 	}
 
 	public String informacionAction() {
