@@ -6,20 +6,18 @@
 package com.agnessgp.mail.modelo;
 
 import java.io.Serializable;
-import java.util.HashSet;
+import java.time.LocalDate;
 import java.util.Set;
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -58,27 +56,41 @@ public class Contacto implements Serializable {
     @Getter
     @Setter
     private String nombres;
+    
     @Column
     @Getter
     @Setter
     private String apellidos;
+    
+    @Column
+    @Getter
+    @Setter
+    private String identificacion;
+
     @Column
     @Getter
     @Setter
     private String correoElectronico;
-
+    
+    @Column
     @Getter
     @Setter
-    @OneToMany(mappedBy = "contacto")
-    Set<Mailing> mailings;
-
-    public Contacto(Long id, String nombres, String apellidos, String correoElectronico) {
-        this.id = id;
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-        this.correoElectronico = correoElectronico;
-    }
-
+    private String telefono;
+    
+    @Column
+    @Getter
+    @Setter
+    private String estado;
+    
+    @Getter
+    @Setter
+    private LocalDate fechaCreacion;
+    
+    @Getter
+    @Setter
+    @ManyToMany
+    Set<Segmento> segmentos;
+    
     public Contacto() {
     }
 

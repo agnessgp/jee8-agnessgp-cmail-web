@@ -1,18 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.agnessgp.mail.modelo;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -20,57 +19,56 @@ import javax.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * Descripción de la Clase
- *
- * @Autor: Patricio Pilco
- * @Fecha: 24/02/2019
- */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = Campania.BUSCAR_TODOS, query = "SELECT c FROM Campania c")
+    @NamedQuery(name = Segmento.BUSCAR_TODOS, query = "SELECT c FROM Segmento c")
 })
-public class Campania implements Serializable {
-
-    /**
+public class Segmento implements Serializable{
+	
+	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1437559718440229531L;
+	private static final long serialVersionUID = 6031012373732728395L;
 	// ======================================
     // =             Constantes              =
     // ======================================
-    public static final String BUSCAR_TODOS = "Campania.encontrarTodos";
+    public static final String BUSCAR_TODOS = "Segmento.encontrarTodos";
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
     private Long id;
-
-	@Getter
-	@Setter
-	private String nombre;
-	
+    
+    @Column
     @Getter
     @Setter
-    private String descripcion;
+    private String nombre;
     
+    @Column
     @Getter
-	@Setter
-	private String tipo;
+    @Setter
+    private String detalle;
     
+    @Column
     @Getter
-	@Setter
-	private String estado;
-
+    @Setter
+    private String estado;
+    
+    @Column
     @Getter
     @Setter
     private LocalDate fechaCreacion;
-   
     
     @Getter
     @Setter
-    @OneToMany(mappedBy = "campania")
+    @OneToMany(mappedBy = "segmento")
     Set<Publicacion> publicaciones;
+    
+    @Getter
+    @Setter
+    @ManyToMany
+    Set<Contacto> contactos;
+    
     
 }

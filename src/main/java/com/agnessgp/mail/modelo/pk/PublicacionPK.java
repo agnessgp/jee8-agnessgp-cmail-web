@@ -17,7 +17,7 @@ import lombok.Setter;
  * @Fecha: 25/02/2019
  */
 @Embeddable
-public class MailingPK implements Serializable {
+public class PublicacionPK implements Serializable {
 
     /**
 	 * 
@@ -30,14 +30,19 @@ public class MailingPK implements Serializable {
     
     @Getter
     @Setter
-    private Long contactoId;
+    private Long plantillaId;
+    
+    @Getter
+    @Setter
+    private Long segmentoId;
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((campaniaId == null) ? 0 : campaniaId.hashCode());
-		result = prime * result + ((contactoId == null) ? 0 : contactoId.hashCode());
+		result = prime * result + ((plantillaId == null) ? 0 : plantillaId.hashCode());
+		result = prime * result + ((segmentoId == null) ? 0 : segmentoId.hashCode());
 		return result;
 	}
 
@@ -48,17 +53,23 @@ public class MailingPK implements Serializable {
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
+			
 			return false;
-		MailingPK other = (MailingPK) obj;
+		PublicacionPK other = (PublicacionPK) obj;
 		if (campaniaId == null) {
 			if (other.campaniaId != null)
 				return false;
 		} else if (!campaniaId.equals(other.campaniaId))
 			return false;
-		if (contactoId == null) {
-			if (other.contactoId != null)
+		if (plantillaId == null) {
+			if (other.plantillaId != null)
 				return false;
-		} else if (!contactoId.equals(other.contactoId))
+		} else if (!plantillaId.equals(other.plantillaId))
+			return false;
+		if (segmentoId == null) {
+			if (other.segmentoId != null)
+				return false;
+		} else if (!segmentoId.equals(other.segmentoId))
 			return false;
 		return true;
 	}
