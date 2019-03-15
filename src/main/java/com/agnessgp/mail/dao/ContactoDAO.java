@@ -75,7 +75,12 @@ public class ContactoDAO {
 		return em.merge(contacto);
 	}
 
-	public void crear(Contacto contacto) {
-		em.persist(contacto);
+	public void crear(Contacto contacto) throws ServiceException {
+		try {
+			em.persist(contacto);
+		} catch (Exception e) {
+			Logger.getAnonymousLogger().info(e.getMessage());
+			throw new ServiceException(e.getMessage());
+		}
 	}
 }

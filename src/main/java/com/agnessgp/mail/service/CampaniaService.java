@@ -23,7 +23,7 @@ public class CampaniaService implements Serializable  {
 		return campaniaDAO.obtenerTodos();
 	}
 	
-	public Campania crearNuevoContacto(Campania campania) throws ServiceException {
+	public Campania crearNuevoCampania(Campania campania) throws ServiceException {
 			campaniaDAO.crear(campania);
 			return campania;
 	}

@@ -7,24 +7,28 @@
 package com.agnessgp.mail.controlador;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.annotation.ManagedProperty;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.primefaces.PrimeFaces;
 
+import com.agnessgp.mail.bean.CalendarBean;
 import com.agnessgp.mail.bean.CampaniaBean;
+import com.agnessgp.mail.bean.MenuBean;
 import com.agnessgp.mail.dto.Componente;
+import com.agnessgp.mail.modelo.Campania;
+import com.agnessgp.mail.service.CampaniaService;
 import com.agnessgp.mail.service.ComponenteService;
+import com.agnessgp.mail.service.ServiceException;
 import com.agnessgp.mail.util.UtilBean;
 
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Descripción de la Clase
@@ -34,7 +38,7 @@ import lombok.Setter;
  */
 @Named("campania")
 @SessionScoped
-public class CampaniaControlador extends UtilBean implements Serializable {
+public class CampaniaControlador implements Serializable {
 
 	/**
 	 * 
@@ -46,13 +50,18 @@ public class CampaniaControlador extends UtilBean implements Serializable {
 	CampaniaBean campaniaBean;
 
 	@EJB
-	@Getter
 	ComponenteService componenteService;
+	
+	@EJB
+	CampaniaService campaniaService;
 
+	@Inject
 	@Getter
-	@Setter
-	@ManagedProperty(value = "#{subMenuPaginaControlador}")
-	private SubMenuPaginaControlador subMenuPagina;
+	private MenuBean menuBean;
+	
+	@Inject
+	@Getter
+	UtilBean utilBean;
 
 	@PostConstruct
 	public void init() {
@@ -61,10 +70,8 @@ public class CampaniaControlador extends UtilBean implements Serializable {
 		campaniaBean.initListaComponentes();
 		campaniaBean.setListaComponentes(componenteService.crear(campaniaBean.getListaComponentes(),
 				new Componente("frgCrearNuevaCampania", "ui:fragment", Boolean.FALSE)));
+		menuBean.initControlador("campania");
 		PrimeFaces.current().ajax().update("frmCrearNuevaCampania");
-		
-		subMenuPagina.initListaAcciones();
-		subMenuPagina.initControlador("campania");
 	}
 
 	public boolean obtenerEstadoComponente(String id) {
@@ -74,4 +81,36 @@ public class CampaniaControlador extends UtilBean implements Serializable {
 		}
 		return Boolean.FALSE;
 	}
+	
+	public void limpiarCampania() {
+		campaniaBean.setCampania(new Campania());
+	}
+	
+	public void nuevoAction() {
+		limpiarCampania();
+		//campaniaBean.getCampania().setFechaCreacion(LocalDate.now());
+		componenteService.activarPorId(campaniaBean.getListaComponentes(), "frgCrearNuevaCampania");
+	}
+	
+	public void crearCampania() {
+		try {
+			campaniaBean.getCampania().setFechaCreacion(LocalDate.now());
+			campaniaService.crearNuevoCampania(campaniaBean.getCampania());
+			buscarCampaniaTodos();
+			utilBean.mostrarMensajeInfoPanel("Aviso", "El contacto fué creado exitosamente.");
+			componenteService.inactivarPorId(campaniaBean.getListaComponentes(), "frgCrearNuevaCampania");
+			PrimeFaces.current().ajax().update("frgCrearNuevaCampania");
+		} catch (ServiceException e) {
+			utilBean.mostrarMensajeErrorPanel("Error", e.getMessage());
+		}
+	}
+	
+	public void buscarCampaniaTodos() {
+		try {
+			campaniaBean.setListaCampaniasTodos(campaniaService.listarCampania());
+		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
+		}
+	}
+
 }

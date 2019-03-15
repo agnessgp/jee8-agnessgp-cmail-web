@@ -40,7 +40,7 @@ public class SendGridService implements Serializable {
         Content content = new Content("text/plain", datosMail.getContent());
         Mail mail = new Mail(from, subject, to, content);
         
-        SendGrid sg = new SendGrid("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");
+        SendGrid sg = new SendGrid("");
         Request request = new Request();
         try {
             request.setMethod(Method.POST);

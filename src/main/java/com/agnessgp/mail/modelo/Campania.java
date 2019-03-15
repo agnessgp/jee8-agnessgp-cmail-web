@@ -52,7 +52,7 @@ public class Campania implements Serializable {
     @Getter
     @Setter
     private LocalDate fechaCreacion;
-
+    
     @Getter
     @Setter
     @OneToMany(mappedBy = "campania")
