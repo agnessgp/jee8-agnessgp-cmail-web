@@ -58,8 +58,15 @@ public class Publicacion implements Serializable{
 	 @Getter
 	 @Setter
 	 @ManyToOne
-	 @MapsId("segmentoId")
-	 @JoinColumn(name = "segmentoId")
-	 Segmento segmento;
+	 @MapsId("receptorId")
+	 @JoinColumn(name = "receptorId")
+	 Receptor receptor;
+	 
+	 @Getter
+	 @Setter
+	 @ManyToOne
+	 @MapsId("emisorId")
+	 @JoinColumn(name = "emisorId")
+	 Emisor emisor;
 	 
 }

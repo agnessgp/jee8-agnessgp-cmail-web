@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="title">Contactos</ui:define>
+	<ui:define name="breadcrumb">
+		<li><p:link
+				outcome="/pages/private/plantillas/pg_plantillas_inicio">Contactos</p:link></li>
+	</ui:define>
+	<ui:define name="content">
+		<h:form id="frmCrearNuevo">
+			<div class="ui-g ui-fluid">
+				<div class="card card-w-title">
+					<h1>Plantillas</h1>
+					<p:tabView>
+						<p:tab title="Todas">
+													</p:tab>
+						<p:tab title="Diseñar" closable="true">
+						
+						
+						<p:lightBox iframe="true" id="lighbox3" style="color: #9FADB5;">
+                            <h:outputLink value="http://www.primefaces.org" title="PrimeFaces HomePage">
+                                <h:outputText value="PrimeFaces HomePage" style="color:#3E98D3;"/>
+                            </h:outputLink>
+                        </p:lightBox>
+						
+								<p:link outcome="/pages/private/bee/editor">Añadir</p:link>
+						</p:tab>
+						
+						<p:tab title="Editar">
+							<h:outputText
+								value="After a break of more than 15 years. Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The Godfather, parallels the young Vito Corleone's rise with his son Michael's spiritual fall, deepening The Godfather's depiction of the dark side of the American dream.
+                                      In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy,
+                                      killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows." />
+						</p:tab>
+					</p:tabView>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>BEE Plugin - AgnessGp</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style type="text/css">
+    * {
+      margin: 0px;
+      padding: 0px;
+    }
+    body {
+      overflow: hidden;
+      background-color: #CCCCCC;
+      color: #000000;
+    }
+    #bee-plugin-container {
+      position: absolute;
+      top: 5px;
+      bottom: 30px;
+      left: 5px;
+      right: 5px;
+    }
+    #integrator-bottom-bar {
+      position: absolute;
+      height: 25px;
+      bottom: 0px;
+      left: 5px;
+      right: 0px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="bee-plugin-container"></div>
+  <div id="integrator-bottom-bar">
+    <!-- You can change the download function to get the JSON and use this input to load it -->
+    Seleccionar la plantilla:
+    <input id="choose-template" type="file" />
+    <!-- You need to provide a send function to use this input field -->
+    Enviar correo:
+    <input id="integrator-test-emails" type="text" />
+  </div>
+
+</body>
+
+<script src="Blob.js"></script>
+<script src="fileSaver.js"></script>
+<script src="https://app-rsrc.getbee.io/plugin/BeePlugin.js"></script>
+<script src="../../../resources/serenity-layout/js/bee.js"></script>
+
+</html>

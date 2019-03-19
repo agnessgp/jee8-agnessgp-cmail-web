@@ -9,8 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -21,9 +19,9 @@ import lombok.Setter;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name = Segmento.BUSCAR_TODOS, query = "SELECT c FROM Segmento c")
+    @NamedQuery(name = Receptor.BUSCAR_TODOS, query = "SELECT c FROM Receptor c")
 })
-public class Segmento implements Serializable{
+public class Receptor implements Serializable{
 	
 	/**
 	 * 
@@ -32,7 +30,7 @@ public class Segmento implements Serializable{
 	// ======================================
     // =             Constantes              =
     // ======================================
-    public static final String BUSCAR_TODOS = "Segmento.encontrarTodos";
+    public static final String BUSCAR_TODOS = "Receptor.encontrarTodos";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,7 +60,7 @@ public class Segmento implements Serializable{
     
     @Getter
     @Setter
-    @OneToMany(mappedBy = "segmento")
+    @OneToMany(mappedBy = "receptor")
     Set<Publicacion> publicaciones;
     
     @Getter
