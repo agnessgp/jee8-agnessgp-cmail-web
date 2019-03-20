@@ -66,8 +66,19 @@
 			<artifactId>primefaces</artifactId>
 			<version>6.2</version>
 		</dependency>
-
 		<dependency>
+    <groupId>org.primefaces.extensions</groupId>
+    <artifactId>primefaces-extensions</artifactId>
+    <version>6.2.10</version>
+</dependency>
+
+<dependency>
+    <groupId>org.primefaces.extensions</groupId>
+    <artifactId>resources-ckeditor</artifactId>
+    <version>6.2.10</version>
+</dependency>
+
+<dependency>
   <groupId>desarrollo</groupId>
   <artifactId>serenity-theme</artifactId>
   <version>1.0.4</version>
@@ -107,26 +118,7 @@
 		</plugins>
 	</build>
 
-	<distributionManagement>
-        <repository>
-            <id>internal</id>
-            <url>http://localhost:7070/repository/internal/</url>
-        </repository>
-    </distributionManagement>
-
-    <repositories>
-        <repository>
-            <id>internal</id>
-            <name>Archiva Managed Internal Repository</name>
-            <url>http://localhost:7070/repository/internal/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
+	
 
 
 </project>
