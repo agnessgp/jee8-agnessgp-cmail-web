@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+               	xmlns:pe="http://primefaces.org/ui/extensions"
+                template="/WEB-INF/template.xhtml">
+                
+    <ui:define name="title">Contactos</ui:define>
+    <ui:define name="breadcrumb">
+        <li><p:link outcome="/pages/private/contactos/pg_contactos_inicio">Contactos</p:link></li>
+    </ui:define>
+                
+    <ui:define name="content">
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-12 ui-lg-6">
+                <!-- Left Side -->
+                <div class="card card-w-title">
+                    <h1>Editor Texto</h1>
+                    <p:panelGrid columns="3" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                    	<h:panelGroup styleClass="md-inputfield">
+                            <p:inputText value="#{contacto.contactoBean.contacto.nombres}"/>
+                            <label>De:</label>
+                        </h:panelGroup>
+                        <h:panelGroup styleClass="md-inputfield">
+                            <p:inputText value="#{contacto.contactoBean.contacto.nombres}"/>
+                            <label>Para:</label>
+                        </h:panelGroup>
+                        <h:panelGroup styleClass="md-inputfield">
+                            <p:inputText />
+                            <label>Asunto:</label>
+                        </h:panelGroup>
+                        <h:panelGroup styleClass="md-inputfield">
+                            <p:inputTextarea rows="3" placeholder="Your Message" autoResize="false"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

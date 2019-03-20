@@ -7,7 +7,9 @@
 package com.agnessgp.mail.modelo.pk;
 
 import java.io.Serializable;
+
 import javax.persistence.Embeddable;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,7 +36,11 @@ public class PublicacionPK implements Serializable {
     
     @Getter
     @Setter
-    private Long segmentoId;
+    private Long receptorId;
+    
+    @Getter
+    @Setter
+    private Long emisorId;
 
 	@Override
 	public int hashCode() {
@@ -42,7 +48,8 @@ public class PublicacionPK implements Serializable {
 		int result = 1;
 		result = prime * result + ((campaniaId == null) ? 0 : campaniaId.hashCode());
 		result = prime * result + ((plantillaId == null) ? 0 : plantillaId.hashCode());
-		result = prime * result + ((segmentoId == null) ? 0 : segmentoId.hashCode());
+		result = prime * result + ((receptorId == null) ? 0 : receptorId.hashCode());
+		result = prime * result + ((emisorId == null) ? 0 : emisorId.hashCode());
 		return result;
 	}
 
@@ -66,10 +73,15 @@ public class PublicacionPK implements Serializable {
 				return false;
 		} else if (!plantillaId.equals(other.plantillaId))
 			return false;
-		if (segmentoId == null) {
-			if (other.segmentoId != null)
+		if (receptorId == null) {
+			if (other.receptorId != null)
 				return false;
-		} else if (!segmentoId.equals(other.segmentoId))
+		} else if (!receptorId.equals(other.receptorId))
+			return false;
+		if (emisorId == null) {
+			if (other.emisorId != null)
+				return false;
+		} else if (!emisorId.equals(other.emisorId))
 			return false;
 		return true;
 	}

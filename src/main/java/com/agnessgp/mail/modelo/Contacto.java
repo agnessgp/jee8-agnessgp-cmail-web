@@ -89,7 +89,7 @@ public class Contacto implements Serializable {
     @Getter
     @Setter
     @ManyToMany
-    Set<Segmento> segmentos;
+    Set<Receptor> segmentos;
     
     public Contacto() {
     }
