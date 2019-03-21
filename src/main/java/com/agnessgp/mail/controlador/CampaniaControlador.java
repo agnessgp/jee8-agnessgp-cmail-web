@@ -113,8 +113,8 @@ public class CampaniaControlador implements Serializable {
 		}
 	}
 	
-	public void itemEditar() {
-		
+	public String itemEditar() {
+		return "pg_campania_detalle.xhtml?faces-redirect=true";
 	}
 
 	public void itemEliminar() {

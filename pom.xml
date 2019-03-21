@@ -118,11 +118,11 @@
 		</plugins>
 	</build>
 
-<!--  
+  
     <distributionManagement>
         <repository>
             <id>internal</id>
-            <url>http://localhost:8181/repository/internal/</url>
+            <url>http://localhost:7070/repository/internal/</url>
         </repository>
     </distributionManagement>
 
@@ -130,7 +130,7 @@
         <repository>
             <id>internal</id>
             <name>Archiva Managed Internal Repository</name>
-            <url>http://localhost:8181/repository/internal/</url>
+            <url>http://localhost:7070/repository/internal/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -139,7 +139,7 @@
             </snapshots>
         </repository>
     </repositories>
--->
+
 
 
 </project>

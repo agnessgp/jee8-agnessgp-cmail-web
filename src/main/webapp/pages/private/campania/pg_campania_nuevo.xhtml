@@ -56,6 +56,7 @@
 	</ui:define>
 	<ui:define name="content">
 		<h:form id="frmCrearNuevaCampania">
+		    <h1>Marketing - Campaña</h1>
 			<p:menubar id="mebSubMenu" model="#{campania.menuBean.model}"></p:menubar>
 
 			<ui:fragment
@@ -80,7 +81,7 @@
 								<p:selectBooleanButton id="value2"
 									value="#{campania.campaniaBean.campania.calendarizado}"
 									onLabel="Calendarizado" offLabel="No Calendarizado"
-									onIcon="pi pi-check" offIcon="pi pi-times">
+									onIcon="pi pi-check" offIcon="pi pi-times" style="width:50%">
 									<!--  <p:ajax update="msgs" listener="#{selectBooleanView.addMessage}" />  -->
 								</p:selectBooleanButton>
 
@@ -103,14 +104,14 @@
 
 			<ui:fragment>
 				<div style="margin-top: 10px;"></div>
-				<p:dataTable id="tblCampaniaTodos" var="campan"
+				<p:dataTable id="tblCampaniaTodos" var="campan"  reflow="true"
 					value="#{campania.campaniaBean.listaCampaniasTodos}">
 					<p:column headerText="Estado" sortBy="#{campan.estado}">
 						<h:outputText value="#{campan.estado}" />
 					</p:column>
 					<p:column headerText="Calendarizado"
 						sortBy="#{campan.calendarizado}">
-						<h:outputText value="#{campan.calendarizado}" />
+						<p:inputSwitch value="#{campan.calendarizado}"/>
 					</p:column>
 					<p:column headerText="Fec.Programada" sortBy="#{campan.fechaCalendarizacion}">
 						<h:outputText value="#{campan.fechaCalendarizacion}" />
@@ -121,7 +122,10 @@
 					<p:column headerText="Creado" sortBy="#{campan.fechaCreacion}">
 						<h:outputText value="#{campan.fechaCreacion}" />
 					</p:column>
-					<p:column headerText="Acciones">
+					<p:column >
+						<p:progressBar value="50" labelTemplate="{value}%" displayOnly="true"/>
+					</p:column>	
+					<p:column >
 						<p:menuButton value="Opciones">
 							<p:menuitem value="Editar" action="#{campania.itemEditar}"
 								icon="pi pi-save" />

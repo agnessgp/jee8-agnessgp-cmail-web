@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="title">Campaña</ui:define>
+	<ui:define name="breadcrumb">
+		<li><p:link outcome="/pages/private/campania/pg_campania_inicio">Campaña</p:link></li>
+
+	</ui:define>
+	<ui:define name="content">
+		<h:form id="frmCrearDetalleCampania">
+			<div class="ui-g ui-fluid">
+				<div class="ui-g-12">
+				
+					<h1>Campaña - workflow</h1>
+				
+					<div class="card">
+						<h1>Steps</h1>
+						<p:steps activeIndex="0">
+							<p:menuitem value="Identificación Emisor" />
+							<p:menuitem value="Contactos" />
+							<p:menuitem value="Payment" />
+							<p:menuitem value="Confirm" />
+						</p:steps>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
