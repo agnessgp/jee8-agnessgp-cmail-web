@@ -92,17 +92,19 @@ public class CampaniaControlador implements Serializable {
 		componenteService.activarPorId(campaniaBean.getListaComponentes(), "frgCrearNuevaCampania");
 	}
 	
-	public void crearCampaniaEnProgreso() {
+	public String crearCampaniaEnProgreso() {
 		try {
 			campaniaBean.getCampania().setFechaCreacion(LocalDate.now());
 			campaniaService.crearNuevoCampaniaEnProgreso(campaniaBean.getCampania());
 			buscarCampaniaTodos();
 			utilBean.mostrarMensajeInfoPanel("Aviso", "El contacto fué creado exitosamente.");
 			componenteService.inactivarPorId(campaniaBean.getListaComponentes(), "frgCrearNuevaCampania");
-			PrimeFaces.current().ajax().update("frmCrearNuevaCampania");
+			return itemEditar();
+			//PrimeFaces.current().ajax().update("frmCrearNuevaCampania");
 		} catch (ServiceException e) {
 			utilBean.mostrarMensajeErrorPanel("Error", e.getMessage());
 		}
+		return null;
 	}
 	
 	public void buscarCampaniaTodos() {

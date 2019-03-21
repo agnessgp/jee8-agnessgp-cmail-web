@@ -13,16 +13,22 @@
 		<h:form id="frmCrearDetalleCampania">
 			<div class="ui-g ui-fluid">
 				<div class="ui-g-12">
-				
+
 					<h1>Campaña - workflow</h1>
-				
+
 					<div class="card">
 						<h1>Steps</h1>
 						<p:steps activeIndex="0">
-							<p:menuitem value="Identificación Emisor" />
-							<p:menuitem value="Contactos" />
-							<p:menuitem value="Payment" />
-							<p:menuitem value="Confirm" />
+							<p:menuitem value="Identificación Emisor">
+								<p:selectOneMenu id="soMEmisor" style="margin-bottom:10px;">
+									<f:selectItem itemLabel="Seleccionar" itemValue="" />
+									<f:selectItems
+										value="#{editor.editorBean.listaItemsEmisorTodos}" />
+								</p:selectOneMenu>
+							</p:menuitem>
+							<p:menuitem value="Elegir Contactos" />
+							<p:menuitem value="Elegir Plantilla" />
+							<p:menuitem value="Confirmar Envio" />
 						</p:steps>
 					</div>
 				</div>
