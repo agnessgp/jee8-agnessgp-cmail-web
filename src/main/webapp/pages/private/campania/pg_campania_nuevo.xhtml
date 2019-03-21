@@ -7,6 +7,52 @@
 	<ui:define name="title">Campaña</ui:define>
 	<ui:define name="breadcrumb">
 		<li><p:link outcome="/pages/private/campania/pg_campania_inicio">Campaña</p:link></li>
+
+		<script type="text/javascript">
+    PrimeFaces.locales['es'] = {
+        closeText: 'Cerrar',
+        prevText: 'Anterior',
+        nextText: 'Siguiente',
+        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+        dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+        dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+        weekHeader: 'Semana',
+        firstDayOfWeek: 1,
+        isRTL: false,
+        showMonthAfterYear: false,
+        yearSuffix: '',
+        timeOnlyTitle: 'Sólo hora',
+        timeText: 'Tiempo',
+        hourText: 'Hora',
+        minuteText: 'Minuto',
+        secondText: 'Segundo',
+        currentText: 'Fecha actual',
+        ampm: false,
+        month: 'Mes',
+        week: 'Semana',
+        day: 'Día',
+        allDayText: 'Todo el día'
+    };
+</script>
+
+		<script type="text/javascript">
+    //<![CDATA[
+    function dateTemplateFunc(date) {
+        return '<span style="background-color:' + ((date.day < 21 && date.day > 10) ? '#81C784' : 'inherit') + ';border-radius:50%;padding: .25em;width: 1.75em; height:1.75em; display:block;">' + date.day + '</span>';
+    }
+    //]]>
+</script>
+
+		<style type="text/css">
+.value {
+	font-weight: bold;
+}
+</style>
+
+
+
 	</ui:define>
 	<ui:define name="content">
 		<h:form id="frmCrearNuevaCampania">
@@ -19,45 +65,73 @@
 						<!-- Left Side -->
 						<div class="card card-w-title">
 							<h1>Nueva Campaña</h1>
+
 							<p:panelGrid columns="1" layout="grid"
 								styleClass="ui-panelgrid-blank form-group">
-								<h:panelGroup styleClass="md-inputfield">
-									<p:inputText
-										value="#{campania.campaniaBean.campania.fechaCreacion}" />
-									<label>Fecha</label>
-								</h:panelGroup>
 								<h:panelGroup styleClass="md-inputfield">
 									<p:inputText
 										value="#{campania.campaniaBean.campania.descripcion}" />
 									<label>Descripcion</label>
 								</h:panelGroup>
+
+							</p:panelGrid>
+							<p:panelGrid columns="4" layout="grid"
+								styleClass="ui-panelgrid-blank form-group">
+								<p:selectBooleanButton id="value2"
+									value="#{campania.campaniaBean.campania.calendarizado}"
+									onLabel="Calendarizado" offLabel="No Calendarizado"
+									onIcon="pi pi-check" offIcon="pi pi-times">
+									<!--  <p:ajax update="msgs" listener="#{selectBooleanView.addMessage}" />  -->
+								</p:selectBooleanButton>
+
+								<p:outputLabel for="datetime" value="Datetime:" />
+								<p:calendar id="datetime"
+									value="#{campania.campaniaBean.campania.fechaCalendarizacion}"
+									pattern="MM/dd/yyyy HH:mm:ss" />
+
+
 							</p:panelGrid>
 							<div align="right">
-								<p:commandButton id="btnAceptar" value="Aceptar" action="#{campania.crearCampania()}" oncomplete="" style="width:auto;margin-bottom:10px;"/>
+								<p:commandButton id="btnAceptar" value="Aceptar"
+									action="#{campania.crearCampaniaEnProgreso()}" oncomplete=""
+									style="width:auto;margin-bottom:10px;" />
 							</div>
 						</div>
 					</div>
 				</div>
 			</ui:fragment>
-			
-			<ui:fragment >
-			<div style="margin-top: 10px;"></div>
-			<p:dataTable id="tblCampaniaTodos" var="campan"
-				value="#{campania.campaniaBean.listaCampaniasTodos}">
-				<p:column headerText="Identificador" sortBy="#{campan.id}">
-					<h:outputText value="#{campan.id}" />
-				</p:column>
 
-				<p:column headerText="Fecha" sortBy="#{campan.fechaCreacion}">
-					<h:outputText value="#{campan.fechaCreacion}" />
-				</p:column>
+			<ui:fragment>
+				<div style="margin-top: 10px;"></div>
+				<p:dataTable id="tblCampaniaTodos" var="campan"
+					value="#{campania.campaniaBean.listaCampaniasTodos}">
+					<p:column headerText="Estado" sortBy="#{campan.estado}">
+						<h:outputText value="#{campan.estado}" />
+					</p:column>
+					<p:column headerText="Calendarizado"
+						sortBy="#{campan.calendarizado}">
+						<h:outputText value="#{campan.calendarizado}" />
+					</p:column>
+					<p:column headerText="Fec.Programada" sortBy="#{campan.fechaCalendarizacion}">
+						<h:outputText value="#{campan.fechaCalendarizacion}" />
+					</p:column>
+					<p:column headerText="Descripción" sortBy="#{campan.descripcion}">
+						<h:outputText value="#{campan.descripcion}" />
+					</p:column>
+					<p:column headerText="Creado" sortBy="#{campan.fechaCreacion}">
+						<h:outputText value="#{campan.fechaCreacion}" />
+					</p:column>
+					<p:column headerText="Acciones">
+						<p:menuButton value="Opciones">
+							<p:menuitem value="Editar" action="#{campania.itemEditar}"
+								icon="pi pi-save" />
+							<p:menuitem value="Eliminar" action="#{campania.itemEliminar}"
+								icon="pi pi-times" />
+						</p:menuButton>
+					</p:column>
+				</p:dataTable>
+			</ui:fragment>
 
-				<p:column headerText="Descripción" sortBy="#{campan.descripcion}">
-					<h:outputText value="#{campan.descripcion}" />
-				</p:column>
-			</p:dataTable>
-		</ui:fragment>
-			
 		</h:form>
 	</ui:define>
 </ui:composition>

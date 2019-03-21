@@ -51,6 +51,7 @@ public class MenuBean implements Serializable {
 		if(nombreControlador.equals("contacto")) {
 			listaAcciones = subMenuService.cargarAccionesBasico();
 		}else if(nombreControlador.equals("campania")) {
+			System.out.println("-------------------------Campania----------------------------");
 			listaAcciones = subMenuService.cargarAccionesCampania();
 		}
 		

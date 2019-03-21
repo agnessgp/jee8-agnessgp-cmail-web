@@ -7,6 +7,7 @@ package com.agnessgp.mail.modelo;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -66,6 +67,14 @@ public class Campania implements Serializable {
     @Getter
     @Setter
     private LocalDate fechaCreacion;
+    
+    @Getter
+    @Setter
+    private Boolean calendarizado;
+    
+    @Getter
+    @Setter
+    private Date fechaCalendarizacion;
    
     
     @Getter

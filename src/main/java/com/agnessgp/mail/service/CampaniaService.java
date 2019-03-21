@@ -1,6 +1,7 @@
 package com.agnessgp.mail.service;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -23,7 +24,9 @@ public class CampaniaService implements Serializable  {
 		return campaniaDAO.obtenerTodos();
 	}
 	
-	public Campania crearNuevoCampania(Campania campania) throws ServiceException {
+	public Campania crearNuevoCampaniaEnProgreso(Campania campania) throws ServiceException {
+			campania.setEstado("EPGR");
+			campania.setFechaCreacion(LocalDate.now());
 			campaniaDAO.crear(campania);
 			return campania;
 	}
