@@ -122,4 +122,8 @@ public class CampaniaControlador implements Serializable {
 	public void itemEliminar() {
 		
 	}
+	
+	public void seleccionarEmisor() {
+
+	}
 }

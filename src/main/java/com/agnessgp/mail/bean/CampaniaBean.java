@@ -8,6 +8,7 @@ import javax.enterprise.context.Dependent;
 
 import com.agnessgp.mail.dto.Componente;
 import com.agnessgp.mail.modelo.Campania;
+import com.agnessgp.mail.modelo.Emisor;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -31,7 +32,16 @@ public class CampaniaBean implements Serializable {
 	@Getter
 	@Setter
 	private List<Campania> listaCampaniasTodos;
+	
+	@Setter
+	@Getter
+	private Emisor emisorCampania;
+	
+	@Setter
+	@Getter
+	private Boolean emisorCampaniaSeleccionarPnl;
 
+	
 	public void initNuevaCapania() {
 		setCampania(new Campania());
 	}
