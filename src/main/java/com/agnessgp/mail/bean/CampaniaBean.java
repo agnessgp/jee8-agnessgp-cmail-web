@@ -39,7 +39,7 @@ public class CampaniaBean implements Serializable {
 	
 	@Setter
 	@Getter
-	private Boolean emisorCampaniaSeleccionarPnl;
+	private Boolean emisorSeleccionarPnl;
 
 	
 	public void initNuevaCapania() {

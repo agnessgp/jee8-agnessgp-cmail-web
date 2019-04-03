@@ -18,7 +18,6 @@ import javax.inject.Named;
 
 import org.primefaces.PrimeFaces;
 
-import com.agnessgp.mail.bean.CalendarBean;
 import com.agnessgp.mail.bean.CampaniaBean;
 import com.agnessgp.mail.bean.MenuBean;
 import com.agnessgp.mail.dto.Componente;
@@ -70,6 +69,8 @@ public class CampaniaControlador implements Serializable {
 		campaniaBean.initListaComponentes();
 		campaniaBean.setListaComponentes(componenteService.crear(campaniaBean.getListaComponentes(),
 				new Componente("frgCrearNuevaCampania", "ui:fragment", Boolean.FALSE)));
+		campaniaBean.setListaComponentes(componenteService.crear(campaniaBean.getListaComponentes(),
+				new Componente("pnlEmisorSeleccionar", "p:panelGrid", Boolean.FALSE)));
 		menuBean.initControlador("campania");
 		PrimeFaces.current().ajax().update("frmCrearNuevaCampania");
 	}
@@ -96,7 +97,7 @@ public class CampaniaControlador implements Serializable {
 		try {
 			campaniaBean.getCampania().setFechaCreacion(LocalDate.now());
 			campaniaService.crearNuevoCampaniaEnProgreso(campaniaBean.getCampania());
-			buscarCampaniaTodos();
+			//buscarCampaniaTodos();
 			utilBean.mostrarMensajeInfoPanel("Aviso", "El contacto fué creado exitosamente.");
 			componenteService.inactivarPorId(campaniaBean.getListaComponentes(), "frgCrearNuevaCampania");
 			return itemEditar();
@@ -124,6 +125,8 @@ public class CampaniaControlador implements Serializable {
 	}
 	
 	public void seleccionarEmisor() {
-
+		System.out.println("______________________________________________________________________");
+		componenteService.activarPorId(campaniaBean.getListaComponentes(), "pnlEmisorSeleccionar");
+		PrimeFaces.current().ajax().update("frmCrearDetalleCampania");
 	}
 }

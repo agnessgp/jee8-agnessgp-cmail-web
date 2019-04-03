@@ -14,7 +14,7 @@
 			<div class="ui-g ui-fluid">
 				<div class="ui-g-12">
 
-					<h1>Campaña - workflow</h1>
+					<h1>Campaña - #{campania.campaniaBean.campania.descripcion}</h1>
 
 					<div class="card">
 						<p:steps activeIndex="0">
@@ -39,16 +39,16 @@
 							<p:spacer width="100" height="10" />		
 							<p:commandButton id="tasksButton" type="button" icon="ui-icon-menu" styleClass="secondary-btn" style="align:right"/>
                     			<p:menu overlay="true" trigger="tasksButton" my="left top" at="left bottom">
-                        		<p:menuitem value="Seleccionar" icon="ui-icon-refresh" url="#" />
+                        		<p:menuitem value="Seleccionar" icon="ui-icon-refresh" action="#{campania.seleccionarEmisor()}" />
                         		<p:menuitem value="Nuevo" icon="ui-icon-update" url="#" />
                         		<p:separator />
                         		<p:menuitem value="Continuar" icon="ui-icon-update" url="#" />
                     			</p:menu>
 						</div>
 						<div class="ui-g-12 ui-md-6 card">
-							<p:panelGrid columns="1" layout="grid"
-								styleClass="ui-panelgrid-blank lesspad" rendered="#{campania.campaniaBean.emisorCampaniaSeleccionarPnl}">
-								<p:selectOneMenu id="soMEmisor" style="margin-bottom:10px;">
+							<p:panelGrid id="pnlEmisorSeleccionar" columns="1" layout="grid"
+								styleClass="ui-panelgrid-blank lesspad" rendered="#{campania.obtenerEstadoComponente('pnlEmisorSeleccionar')}">
+								<p:selectOneMenu>
 									<f:selectItem itemLabel="Seleccionar Emisor" itemValue="" />
 									<f:selectItems
 										value="#{editor.editorBean.listaItemsEmisorTodos}" />

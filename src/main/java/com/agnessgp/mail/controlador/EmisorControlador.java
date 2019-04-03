@@ -11,7 +11,6 @@ import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -22,12 +21,11 @@ import org.primefaces.PrimeFaces;
 import org.primefaces.event.MenuActionEvent;
 import org.primefaces.model.menu.MenuItem;
 
-import com.agnessgp.mail.bean.ContactoBean;
+import com.agnessgp.mail.bean.EmisorBean;
 import com.agnessgp.mail.bean.MenuBean;
 import com.agnessgp.mail.dto.Componente;
 import com.agnessgp.mail.modelo.Contacto;
 import com.agnessgp.mail.service.ComponenteService;
-import com.agnessgp.mail.service.ContactoService;
 import com.agnessgp.mail.service.ServiceException;
 import com.agnessgp.mail.util.UtilBean;
 
@@ -39,9 +37,9 @@ import lombok.Getter;
  * @Autor: Patricio Pilco
  * @Fecha: 25/02/2019
  */
-@Named("emisor")
+@Named("contacto")
 @SessionScoped
-public class ContactoControlador implements Serializable {
+public class EmisorControlador implements Serializable {
 
 	/**
 	 * 
@@ -50,11 +48,11 @@ public class ContactoControlador implements Serializable {
 
 	@Inject
 	@Getter
-	ContactoBean contactoBean;
+	EmisorBean emisorBean;
 
-	@EJB
-	@Getter
-	ContactoService contactoService;
+	//@EJB
+	//@Getter
+	//ContactoService contactoService;
 
 	@EJB
 	@Getter
@@ -70,24 +68,25 @@ public class ContactoControlador implements Serializable {
 	
 	@PostConstruct
 	public void init() {
-		Logger.getAnonymousLogger().info("Cargando Contacto Controlador....");
-		contactoBean.initNuevoContacto();
-		contactoBean.initListaContactos();
-		contactoBean.initListaComponentes();
-		contactoBean.setListaComponentes(componenteService.crear(contactoBean.getListaComponentes(),
+		Logger.getAnonymousLogger().info("Cargando Emisor Controlador....");
+		emisorBean.initEmisor();
+		emisorBean.initListaEmisores();
+		emisorBean.initListaComponentes();
+		emisorBean.setListaComponentes(componenteService.crear(emisorBean.getListaComponentes(),
 				new Componente("frgCrearNuevo", "ui:fragment", Boolean.FALSE)));
-		menuBean.initControlador("contacto");
-		PrimeFaces.current().ajax().update("frmCrearNuevo");
+		menuBean.initControlador("emisor");
+		PrimeFaces.current().ajax().update("frmCrearNuevoEmisor");
 	}
 
 	public boolean obtenerEstadoComponente(String id) {
-		Componente componente = componenteService.buscarPorId(contactoBean.getListaComponentes(), id);
+		Componente componente = componenteService.buscarPorId(emisorBean.getListaComponentes(), id);
 		if (componente != null) {
 			return componente.getVisible();
 		}
 		return Boolean.FALSE;
 	}
 
+	/*
 	public void crearContacto() {
 		try {
 			contactoService.crearNuevoContacto(contactoBean.getContacto());
@@ -136,5 +135,5 @@ public class ContactoControlador implements Serializable {
 		//String icono = new String(menuItem.getIcon()); 
 		//Logger.getAnonymousLogger().info("icono...." + icono);
 	}
-
+*/
 }

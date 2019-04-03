@@ -50,10 +50,6 @@ public class Emisor implements Serializable {
     @Getter
     @Setter
     private Long id;
-
-	@Getter
-	@Setter
-	private String empresaId;
 	
     @Getter
     @Setter
